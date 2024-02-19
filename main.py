@@ -70,7 +70,7 @@ output_frame.pack(pady=10)
 
 # Add output text widget to display prediction results
 output_text = tk.Text(output_frame, height=20, width=80)
-output_text.pack()
+output_text.pack(side="right")
 
 # Run the main event loop
 root.mainloop()
