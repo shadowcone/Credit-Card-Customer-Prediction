@@ -48,10 +48,24 @@ def perform_prediction():
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
+    # Enable the save button
+    save_button.config(state=tk.NORMAL)
+
+def save_output():
+    output = output_text.get(1.0, tk.END)
+    file_path = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv"), ("Excel files", "*.xlsx")])
+    if file_path:
+        try:
+            with open(file_path, "w") as file:
+                file.write(output)
+            messagebox.showinfo("Success", "Output saved successfully!")
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+
 predict_button = tk.Button(input_frame, text="Predict", command=perform_prediction, font=("Ariel", 10, "bold"), bg="white", fg="#1B1A55", activebackground="#1B1A55", activeforeground="white")
 predict_button.grid(row=0, column=2, padx=5, pady=5)
 
-select_button = tk.Button(input_frame, text="Choose File", command=select_csv_file, bg="#9290C3", fg="#070F2B", font=("Roboto", 12, "bold"))
+select_button = tk.Button(input_frame, text="Choose File", command=select_csv_file, font=("Ariel", 10, "bold"), bg="white", fg="#1B1A55", activebackground="#1B1A55", activeforeground="white")
 select_button.grid(row=0, column=0, padx=5, pady=5)
 
 output_frame = tk.Frame(root)
@@ -62,5 +76,8 @@ output_text = tk.Text(output_frame, height=20, width=80, yscrollcommand=scrollba
 scrollbar.config(command=output_text.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 output_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+save_button = tk.Button(root, text="Save", command=save_output, state=tk.DISABLED, font=("Ariel", 10, "bold"), bg="white", fg="#1B1A55", activebackground="#1B1A55", activeforeground="white")
+save_button.pack(pady=10)
 
 root.mainloop()
