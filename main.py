@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
-# Dark Knight theme colors
+
 DARK_GRAY = "#333333"
 DARK_BLUE = "#0B3D91"
 DARK_GOTHAM = "#1F1F1F"
@@ -13,7 +13,7 @@ BATMAN_YELLOW = "#FFD700"
 
 root = tk.Tk()
 root.configure(bg=DARK_GOTHAM)
-root.title("CreditCue - Dark Knight Edition") 
+root.title("Credit Caerd Customer Prediction Model") 
 
 # Define hover effects
 def on_enter(event):
@@ -75,7 +75,7 @@ def save_output():
         except Exception as e:
             messagebox.showerror("Error", str(e))
 
-predict_button = tk.Button(input_frame, text="Predict", font=("Ariel", 10, "bold"), bg=DARK_GRAY, fg=BATMAN_YELLOW, activebackground=DARK_BLUE, activeforeground=BATMAN_YELLOW)
+predict_button = tk.Button(input_frame, text="Predict", command=perform_prediction, font=("Ariel", 10, "bold"), bg=DARK_GRAY, fg=BATMAN_YELLOW, activebackground=DARK_BLUE, activeforeground=BATMAN_YELLOW)
 predict_button.grid(row=0, column=2, padx=5, pady=5)
 predict_button.bind("<Enter>", on_enter)
 predict_button.bind("<Leave>", on_leave)
