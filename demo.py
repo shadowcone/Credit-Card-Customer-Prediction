@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
-from PIL import Image, ImageTk 
+from PIL import Image, ImageTk  # Importing PIL modules
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -8,15 +8,17 @@ from sklearn.neighbors import KNeighborsClassifier
 root = tk.Tk()
 root.title("Credit Card Customer Prediction Model")
 
-
+# Colors for dark theme
 bg_color = "#202020"
 button_bg_color = "#333333"
 button_fg_color = "white"
 text_color = "white"
 
+# Change the theme to "clam"
 style = ttk.Style(root)
 style.theme_use("clam")
 
+# Configure the styles for buttons and frames
 style.configure("TButton", background=button_bg_color, foreground=button_fg_color, font=("Arial", 10, "bold"))
 style.configure("TFrame", background=bg_color)
 style.configure("TLabel", foreground=text_color, background=bg_color)
@@ -27,6 +29,7 @@ def on_enter(event):
 def on_leave(event):
     pass
 
+# Function to set background image
 def set_background(image_path):
     img = Image.open(image_path)
     background_image = ImageTk.PhotoImage(img)
@@ -34,7 +37,7 @@ def set_background(image_path):
     background_label.place(relwidth=1, relheight=1)
     background_label.image = background_image
 
-
+# Set background image
 set_background("bg.jpg")  
 
 input_frame = ttk.Frame(root)
@@ -60,8 +63,11 @@ def train_and_predict(input_csv_path):
     knn.fit(x_train, y_train)
 
     input_data = pd.read_csv(input_csv_path)
+
     predictions = knn.predict(input_data[['Age', 'Salary']])
+
     input_data['Prediction'] = predictions
+
     return input_data
 
 def perform_prediction():
@@ -73,7 +79,7 @@ def perform_prediction():
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
-
+    # Enable the save button
     save_button.config(state=tk.NORMAL)
 
 def save_output():
